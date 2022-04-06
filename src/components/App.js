@@ -1,15 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Navbar from "./Navbar";
-import User from "./User";
+import Users from "./Users";
 
 export class App extends Component {
   render() {
-    const a = 123;
     return (
-      <Fragment>
+      <div>
         <Navbar />
-        <User />
-      </Fragment>
+        <Users />
+      </div>
     );
   }
 }
