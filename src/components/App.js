@@ -7,11 +7,13 @@ import Search from "./Search";
 export class App extends Component {
   constructor(props) {
     super(props);
+    this.searchUsers = this.searchUsers.bind(this);
     this.state = {
       loading: false,
       users: [],
     };
   }
+
   componentDidMount() {
     this.setState({ loading: true });
     setTimeout(() => {
@@ -20,12 +22,24 @@ export class App extends Component {
         .then((res) => this.setState({ users: res.data, loading: false }));
     }, 500);
   }
+
+  searchUsers(keyword) {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      axios
+        .get(`https://api.github.com/search/users?q=${keyword}`)
+        .then((res) =>
+          this.setState({ users: res.data.items, loading: false })
+        );
+    }, 500);
+  }
+
   render() {
     const { users, loading } = this.state;
     return (
       <div>
         <Navbar />
-        <Search />
+        <Search searchUsers={this.searchUsers} />
         <Users users={users} loading={loading} />
       </div>
     );
