@@ -23,9 +23,10 @@ export class Search extends Component {
   }
   render() {
     const { keyword } = this.state;
+    const { clearUsers, showClearButton } = this.props;
     return (
-      <form onSubmit={this.onSubmit}>
-        <div className="container my-3">
+      <div className="container my-3">
+        <form onSubmit={this.onSubmit}>
           <div className="input-group">
             <input
               type="text"
@@ -39,8 +40,17 @@ export class Search extends Component {
               </button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+        {showClearButton && (
+          <button
+            onClick={clearUsers}
+            className="btn btn-secondary btn-sm btn-block mt-2"
+          >
+            {" "}
+            Clear Results{" "}
+          </button>
+        )}
+      </div>
     );
   }
 }
