@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 
 export class Navbar extends Component {
   render() {
+    const { icon, title } = this.props;
     return (
       <nav className="navbar navbar-dark bg-primary">
-        <a href="#" className="navbar-brand">
-          <i className={this.props.icon}></i> {this.props.title}
-        </a>
+        <div className="container">
+          <a href="#" className="navbar-brand">
+            <i className={icon}></i> {title}
+          </a>
+        </div>
       </nav>
     );
   }

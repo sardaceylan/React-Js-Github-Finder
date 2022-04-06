@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import Users from "./Users";
 import axios from "axios";
+import Search from "./Search";
 
 export class App extends Component {
   constructor(props) {
@@ -17,13 +18,14 @@ export class App extends Component {
       axios
         .get("https://api.github.com/users")
         .then((res) => this.setState({ users: res.data, loading: false }));
-    }, 1500);
+    }, 500);
   }
   render() {
     const { users, loading } = this.state;
     return (
       <div>
         <Navbar />
+        <Search />
         <Users users={users} loading={loading} />
       </div>
     );
