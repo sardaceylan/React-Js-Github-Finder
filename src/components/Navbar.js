@@ -18,7 +18,7 @@ export class Navbar extends Component {
                     </ul>
                 </div>
             </div>
-             
+              
            </nav>
         )
     }
