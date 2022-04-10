@@ -7,7 +7,7 @@ export class Search extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             keyword: ''
-        }
+        } 
     }
 
     onChange(e) {
