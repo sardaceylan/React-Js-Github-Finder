@@ -1,20 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Loading from "./Loading";
 import Repos from "./Repos";
+import GithubContext from "../context/githubContext";
 
-const UserDetails = ({
-  getUser,
-  getUserRepos,
-  match,
-  loading,
-  repos,
-  user,
-}) => {
-  
+const UserDetails = ({ getUserRepos, match, repos }) => {
+  const { getUser, loading, user } = useContext(GithubContext);
+
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
   }, []);
+
   const {
     login,
     avatar_url,
@@ -72,11 +68,11 @@ const UserDetails = ({
                   Following: {following}
                 </span>
                 <span className="badge badge-success m-1">
-                  Repos {public_repos}
+                  Repos: {public_repos}
                 </span>
               </div>
             </div>
-            <ul className="list-group-flush">
+            <ul className="list-group list-group-flush">
               <Repos repos={repos} />
             </ul>
           </div>

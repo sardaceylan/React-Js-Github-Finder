@@ -10,20 +10,9 @@ import UserDetails from "./UserDetails";
 import GithubState from "../context/githubState";
 
 const App = () => {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-
-  const getUser = (username) => {
-    setLoading(true);
-    setTimeout(() => {
-      axios.get(`https://api.github.com/users/${username}`).then((res) => {
-        setUser(res.data), setLoading(false);
-      });
-    }, 250);
-  };
 
   const getUserRepos = (username) => {
     setLoading(true);
@@ -33,11 +22,7 @@ const App = () => {
         .then((res) => {
           setRepos(res.data), setLoading(false);
         });
-    }, 250);
-  };
-
-  const clearUsers = () => {
-    setUsers([]);
+    }, 500);
   };
 
   const showAlert = (msg, type) => {
@@ -58,12 +43,8 @@ const App = () => {
             path="/"
             render={(props) => (
               <>
-                <Search
-                  clearUsers={clearUsers}
-                  showClearButton={users.length > 0 ? true : false}
-                  setAlert={showAlert}
-                />
-                <Users users={users} loading={loading} />
+                <Search setAlert={showAlert} />
+                <Users />
               </>
             )}
           />
@@ -73,11 +54,8 @@ const App = () => {
             render={(props) => (
               <UserDetails
                 {...props}
-                getUser={getUser}
                 getUserRepos={getUserRepos}
-                user={user}
                 repos={repos}
-                loading={loading}
               />
             )}
           />
